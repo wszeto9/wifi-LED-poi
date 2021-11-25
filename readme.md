@@ -10,5 +10,10 @@ USB-C Rechargable, WiFi Capable Glow Poi
 </ul>
 
 ![BOTTOM](images/poi_PCB_bottom.jpg)
+PCB Bottom
 
 ![TOP](images/poi_PCB_top.jpg)
+PCB Top
+
+![animation](images/animation_cut_uncut.gif)
+Glow Poi assembled with shell and battery
