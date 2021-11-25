@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name USB4120-03-C_REVA)(type KiCad)(uri ${KIPRJMOD}/Packages/USB4120-03-C_REVA.pretty)(options "")(descr ""))
+  (lib (name 8mm_switch)(type KiCad)(uri ${KIPRJMOD}/Packages/8mm_switch.pretty)(options "")(descr ""))
+)
