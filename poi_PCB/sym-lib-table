@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name USB4120-03-C_REVA)(type Legacy)(uri ${KIPRJMOD}/Packages/USB4120-03-C_REVA/USB4120-03-C_REVA.lib)(options "")(descr ""))
   (lib (name Switch_8mm)(type Legacy)(uri ${KIPRJMOD}/Switch_8mm.lib)(options "")(descr ""))
+  (lib (name SPH0645LM4H-B)(type Legacy)(uri ${KIPRJMOD}/Packages/SPH0645LM4H-B/SPH0645LM4H-B.lib)(options "")(descr ""))
 )

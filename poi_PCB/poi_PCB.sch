@@ -1526,4 +1526,37 @@ $EndComp
 Connection ~ 5650 1400
 Wire Wire Line
 	5650 1400 5900 1400
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 61A080CC
+P 4800 2700
+F 0 "H1" H 4900 2746 50  0000 L CNN
+F 1 "MountingHole" H 4900 2655 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 4800 2700 50  0001 C CNN
+F 3 "~" H 4800 2700 50  0001 C CNN
+	1    4800 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 61A086D8
+P 4800 2900
+F 0 "H2" H 4900 2946 50  0000 L CNN
+F 1 "MountingHole" H 4900 2855 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 4800 2900 50  0001 C CNN
+F 3 "~" H 4800 2900 50  0001 C CNN
+	1    4800 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 61A10561
+P 4800 3100
+F 0 "H3" H 4900 3146 50  0000 L CNN
+F 1 "MountingHole" H 4900 3055 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3" H 4800 3100 50  0001 C CNN
+F 3 "~" H 4800 3100 50  0001 C CNN
+	1    4800 3100
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
