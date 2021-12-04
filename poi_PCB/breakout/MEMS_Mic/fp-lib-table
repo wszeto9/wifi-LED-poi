@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name MEMS_Mic)(type KiCad)(uri C:/Users/Wilson/Documents/GitHub/wifi-LED-poi/poi_PCB/breakout/MEMS_Mic.pretty)(options "")(descr ""))
+  (lib (name poi_PCB)(type KiCad)(uri C:/Users/Wilson/Documents/GitHub/wifi-LED-poi/poi_PCB/Packages/CMM-4030D-261-I2S-TR/poi_PCB.pretty)(options "")(descr ""))
+  (lib (name CMM-4030D-261-I2S-TR)(type KiCad)(uri C:/Users/Wilson/Documents/GitHub/wifi-LED-poi/poi_PCB/Packages/CMM-4030D-261-I2S-TR.pretty)(options "")(descr ""))
+)

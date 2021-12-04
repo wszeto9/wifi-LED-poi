@@ -1,4 +1,8 @@
 (fp_lib_table
   (lib (name USB4120-03-C_REVA)(type KiCad)(uri ${KIPRJMOD}/Packages/USB4120-03-C_REVA.pretty)(options "")(descr ""))
   (lib (name 8mm_switch)(type KiCad)(uri ${KIPRJMOD}/Packages/8mm_switch.pretty)(options "")(descr ""))
+  (lib (name LSM6DS33TR)(type KiCad)(uri ${KIPRJMOD}/Packages/LSM6DS33TR/LSM6DS33TR.pretty)(options "")(descr ""))
+  (lib (name CMM-4030D-261-I2S-TR)(type KiCad)(uri ${KIPRJMOD}/Packages/CMM-4030D-261-I2S-TR.pretty)(options "")(descr ""))
+  (lib (name poi_PCB)(type KiCad)(uri ${KIPRJMOD}/Packages/CMM-4030D-261-I2S-TR/poi_PCB.pretty)(options "")(descr ""))
+  (lib (name TL2233OA)(type KiCad)(uri ${KIPRJMOD}/Packages/TL2233OA/TL2233OA.pretty)(options "")(descr ""))
 )

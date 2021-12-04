@@ -2,4 +2,7 @@
   (lib (name USB4120-03-C_REVA)(type Legacy)(uri ${KIPRJMOD}/Packages/USB4120-03-C_REVA/USB4120-03-C_REVA.lib)(options "")(descr ""))
   (lib (name Switch_8mm)(type Legacy)(uri ${KIPRJMOD}/Switch_8mm.lib)(options "")(descr ""))
   (lib (name SPH0645LM4H-B)(type Legacy)(uri ${KIPRJMOD}/Packages/SPH0645LM4H-B/SPH0645LM4H-B.lib)(options "")(descr ""))
+  (lib (name LSM6DS33TR)(type Legacy)(uri ${KIPRJMOD}/Packages/LSM6DS33TR/LSM6DS33TR.lib)(options "")(descr ""))
+  (lib (name CMM-4030D-261-I2S-TR)(type Legacy)(uri ${KIPRJMOD}/Packages/CMM-4030D-261-I2S-TR/CMM-4030D-261-I2S-TR.lib)(options "")(descr ""))
+  (lib (name TL2233OA)(type Legacy)(uri ${KIPRJMOD}/Packages/TL2233OA/TL2233OA.lib)(options "")(descr ""))
 )

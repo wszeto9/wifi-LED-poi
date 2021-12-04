@@ -1,0 +1,93 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CMM-4030D-261-I2S-TR:CMM-4030D-261-I2S-TR MK1
+U 1 1 61AA6153
+P 5550 4050
+F 0 "MK1" H 5550 4617 50  0000 C CNN
+F 1 "CMM-4030D-261-I2S-TR" H 5550 4526 50  0000 C CNN
+F 2 "CMM-4030D-261-I2S-TR:MIC_CMM-4030D-261-I2S-TR" H 5550 4050 50  0001 L BNN
+F 3 "" H 5550 4050 50  0001 L BNN
+F 4 "1.4 mm" H 5550 4050 50  0001 L BNN "MAXIMUM_PACKAGE_HEIGHT"
+F 5 "1.0" H 5550 4050 50  0001 L BNN "PARTREV"
+F 6 "Manufacturer Recommendations" H 5550 4050 50  0001 L BNN "STANDARD"
+F 7 "CUI Devices" H 5550 4050 50  0001 L BNN "MANUFACTURER"
+	1    5550 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x04_Male J1
+U 1 1 61AA6C00
+P 6800 4250
+F 0 "J1" H 6772 4132 50  0000 R CNN
+F 1 "Conn_01x04_Male" H 6772 4223 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 6800 4250 50  0001 C CNN
+F 3 "~" H 6800 4250 50  0001 C CNN
+	1    6800 4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x04_Male J2
+U 1 1 61AA88CD
+P 6850 3650
+F 0 "J2" H 6958 3931 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 6958 3840 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 6850 3650 50  0001 C CNN
+F 3 "~" H 6850 3650 50  0001 C CNN
+	1    6850 3650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6600 4350 6250 4350
+Wire Wire Line
+	6250 4150 6600 4150
+Wire Wire Line
+	4850 3950 4600 3950
+Wire Wire Line
+	4600 3950 4600 4700
+Wire Wire Line
+	4600 4700 7000 4700
+Wire Wire Line
+	7000 4700 7000 4050
+Wire Wire Line
+	7000 4050 6600 4050
+Wire Wire Line
+	4850 4150 5400 4150
+Wire Wire Line
+	5400 4150 5400 3400
+Wire Wire Line
+	5400 3400 7200 3400
+Wire Wire Line
+	7200 3400 7200 3750
+Wire Wire Line
+	7200 3750 6650 3750
+Wire Wire Line
+	6250 4050 6450 4050
+Wire Wire Line
+	6450 4050 6450 3650
+Wire Wire Line
+	6450 3650 6650 3650
+Wire Wire Line
+	6250 3950 6400 3950
+Wire Wire Line
+	6400 3950 6400 3550
+Wire Wire Line
+	6400 3550 6650 3550
+Wire Wire Line
+	6250 3750 6250 3450
+Wire Wire Line
+	6250 3450 6650 3450
+$EndSCHEMATC
