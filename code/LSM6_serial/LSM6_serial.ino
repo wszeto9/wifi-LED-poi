@@ -24,7 +24,8 @@ char report[80];
 void setup()
 {
   Serial.begin(9600);
-  Wire.begin (21, 4);
+ while(!Serial){}
+  Wire.begin (16, 4);
 
   if (!imu.init())
   {
