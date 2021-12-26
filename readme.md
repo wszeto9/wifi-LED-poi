@@ -7,7 +7,6 @@ USB-C Rechargable, WiFi Capable Glow Poi
 <li>Rechargable battery with a battery life of 3.5-5 hours</li>
 <li>Programmable over USB-C</li>
 <li>Charging over USB-C</li>
-<li>analog RGB strip support</li>
 <li>0.47F Supercapacitor capable of nefarious discharge acts</li>
 <li>Onboard accelerometer and microphone</li>
 </ul>
