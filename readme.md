@@ -17,5 +17,8 @@ PCB Bottom
 ![TOP](images/poi_PCB_top.jpg)
 PCB Top
 
-![animation](images/animation_cut_uncut.gif)
+![3D assembled](images/assembled_PCB.jpg)
+PCBA
+
+![animation](images/poi_assembly_sunset.jpg)
 Glow Poi assembled with shell and battery
