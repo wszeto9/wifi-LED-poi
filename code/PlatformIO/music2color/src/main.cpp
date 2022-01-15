@@ -7,7 +7,7 @@
 #define LED_ARRAY 17
 #define NUM_LEDS    8 // 150 LEDs in the full strip
 #define PATTERN_LEN 4
-#define BRIGHTNESS  64
+#define BRIGHTNESS  256
 #define LED_TYPE  WS2812
 #define COLOR_ORDER GRB
 
@@ -40,7 +40,7 @@ void setup() {
   FastLED.addLeds<WS2812, LED_ARRAY, GRB>(leds, NUM_LEDS);
   
   // set the LED brightness
-  FastLED.setBrightness(64);
+  FastLED.setBrightness(BRIGHTNESS);
 
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
