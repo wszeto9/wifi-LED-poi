@@ -6,8 +6,8 @@
 #define LED_BUILTIN  13
 #define LED_ARRAY 17
 #define NUM_LEDS    8 // 150 LEDs in the full strip
-#define PATTERN_LEN 4
-#define BRIGHTNESS  256
+#define PATTERN_LEN 1
+#define BRIGHTNESS  255
 #define LED_TYPE  WS2812
 #define COLOR_ORDER GRB
 
@@ -25,7 +25,7 @@ String header;
 
 // Auxiliar variables to store the current output state
 String rgbState = "000000000"; //GRB
-CRGB current_color = CRGB(0, 0, 0); 
+CRGB current_color = CRGB(100, 0, 0); 
 // Current time
 unsigned long currentTime = millis();
 // Previous time
@@ -34,15 +34,20 @@ unsigned long previousTime = 0;
 const long timeoutTime = 2000;
 
 void setup() {
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   // put your setup code here, to run once:
   delay( 3000 ); // power-up safety delay
 
-  FastLED.addLeds<WS2812, LED_ARRAY, GRB>(leds, NUM_LEDS);
+  FastLED.addLeds<NEOPIXEL, LED_ARRAY>(leds, NUM_LEDS);
   
   // set the LED brightness
   FastLED.setBrightness(BRIGHTNESS);
 
-  pinMode(LED_BUILTIN, OUTPUT);
+  fill_solid(leds, NUM_LEDS, current_color);
+  FastLED.show();
+
   Serial.begin(115200);
   //Serial.print("HERE");
   // Connect to Wi-Fi network with SSID and password
@@ -54,6 +59,9 @@ void setup() {
     Serial.print(".");
   }
   // Print local IP address and start web server
+  current_color = CRGB(100, 100, 100);
+  fill_solid(leds, NUM_LEDS, current_color);
+  FastLED.show();
   Serial.println("");
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");

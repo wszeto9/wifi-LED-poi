@@ -345,6 +345,7 @@ void mic_i2s_reader_task(void* parameter) {
 // 
 double dB_reading;
 void setup() {
+  pinMode(34, INPUT);
   pinMode(13, OUTPUT);
   analogWriteResolution(13, 12);
   // If needed, now you can actually lower the CPU frquency,
@@ -395,7 +396,8 @@ void setup() {
       Leq_samples = 0;
       
       // Serial output, customize (or remove) as needed
-      Serial.printf("%.1f\n", Leq_dB);
+      //Serial.printf("%.1f\n", Leq_dB);
+      Serial.println(analogRead(34) / 4095 * 3.3 * 2);
       analogWrite(13, (Leq_dB-60) * 2);
       // Debug only
       //Serial.printf("%u processing ticks\n", q.proc_ticks);
