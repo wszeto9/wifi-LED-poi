@@ -4,6 +4,7 @@
 #include <string.h>
 #include "SparkFun_LIS2DH12.h" 
 #include <Wire.h>
+#include <analogWrite.h>
 
 SPARKFUN_LIS2DH12 accel;
 
@@ -47,12 +48,27 @@ float brightness_coeff = 1;
   int g = 0;
   int b = 0;
 
+String charge_state = "off"; 
+String discharge_state = "off"; 
+int CHARGE_OUTPUT = 27; 
+int DISCHARGE_OUTPUT = 14; 
+const int INCREASE_RATE = 5; 
+const int CHARGE_DELAY_TIME = 100; 
+int charge_duty_cycle = 10; 
+unsigned long charge_prev_increase = millis(); 
+unsigned long charge_current_time = millis(); 
+
 void setup() {
   battery_voltage = (float) analogRead(34) / 4095 * 3.3 * 2;
   ledcSetup(PWMChannel, PWMFreq, PWMResolution);
   ledcAttachPin(LED_BUILTIN, PWMChannel);
   ledcWrite(PWMChannel, MAX_DUTY_CYCLE * (battery_voltage-3.0) / (4.2-3.0));
 
+  pinMode(LED_BUILTIN, OUTPUT); 
+  pinMode(CHARGE_OUTPUT, OUTPUT); 
+  pinMode(DISCHARGE_OUTPUT, OUTPUT); 
+  digitalWrite(CHARGE_OUTPUT, LOW); 
+  digitalWrite(DISCHARGE_OUTPUT, LOW); 
 
   FastLED.addLeds<NEOPIXEL, LED_ARRAY>(leds, NUM_LEDS);
   
@@ -143,17 +159,78 @@ if (accel.available())
             client.println("Content-type:text/html");
             client.println("Connection: close");
             client.println();
+
+            if (header.indexOf("GET /" + String(CHARGE_OUTPUT) + "/on") >= 0) {
+              Serial.println("charging");
+              charge_state = "on";
+              //digitalWrite(CHARGE_OUTPUT, HIGH);
+              // charge_current_time = millis(); 
+              // if (charge_duty_cycle <= 250 && charge_current_time >= CHARGE_DELAY_TIME){
+              //   charge_duty_cycle += INCREASE_RATE;
+              //   Serial.print(charge_duty_cycle);  
+              // }
+              // analogWrite(LED_BUILTIN, charge_duty_cycle); 
+            } else if (header.indexOf("GET /" + String(CHARGE_OUTPUT) + "/off") >= 0) {
+              Serial.println("not charging");
+              charge_state = "off";
+              digitalWrite(CHARGE_OUTPUT, LOW);
+            } else if (header.indexOf("GET /" + String(DISCHARGE_OUTPUT) + "/on") >= 0) {
+              Serial.println("discharging");
+              discharge_state = "on";
+              digitalWrite(DISCHARGE_OUTPUT, HIGH);
+            } else if (header.indexOf("GET /" + String(DISCHARGE_OUTPUT) + "/off") >= 0) {
+              Serial.println("not discharging");
+              discharge_state = "off";
+              digitalWrite(DISCHARGE_OUTPUT, LOW);
+            }
+ 
+            // Display the HTML web page
+            client.println("<!DOCTYPE html><html>");
+            client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+            client.println("<link rel=\"icon\" href=\"data:,\">");
+            // CSS to style the on/off buttons 
+            // Feel free to change the background-color and font-size attributes to fit your preferences
+            client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
+            client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
+            client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
+            client.println(".button2 {background-color: #555555;}</style></head>");
+ 
+            // Web Page Heading
+            client.println("<body><h1>ESP32 Web Server</h1>");
+ 
+            // Display current state, and ON/OFF buttons for GPIO 26  
+            client.println("<p>Charging - State " + charge_state + "</p>");
+            // If the output26State is off, it displays the ON button       
+            if (charge_state=="off") {
+              client.println("<p><a href=\"/" + String(CHARGE_OUTPUT) + "/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              client.println("<p><a href=\"/" + String(CHARGE_OUTPUT) + "/off\"><button class=\"button button2\">OFF</button></a></p>");
+            } 
+ 
+            // Display current state, and ON/OFF buttons for GPIO 27  
+            client.println("<p>Discharging - State " + discharge_state + "</p>");
+            // If the output27State is off, it displays the ON button       
+            if (discharge_state == "off") {
+              client.println("<p><a href=\"/" + String(DISCHARGE_OUTPUT) + "/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              client.println("<p><a href=\"/" + String(DISCHARGE_OUTPUT) + "/off\"><button class=\"button button2\">OFF</button></a></p>");
+            }
+            client.println("</body></html>");
             
             //Serial.println(header); 
-            String color_string = header.substring(8, 17);
-            Serial.println(color_string);
-            if (color_string.toInt() > 0) 
+            if (header.indexOf("GET /" + String(LED_ARRAY)) >= 0)
             {
-              r = color_string.substring(0, 3).toInt(); 
-              g = color_string.substring(3, 6).toInt(); 
-              b = color_string.substring(6, 9).toInt(); 
-            }
+              String color_string = header.substring(8, 17);
+              Serial.println(color_string);
+              if (color_string.toInt() > 0) 
+              {
+                r = color_string.substring(0, 3).toInt(); 
+                g = color_string.substring(3, 6).toInt(); 
+                b = color_string.substring(6, 9).toInt(); 
+              }
         
+            }
+            
             // The HTTP response ends with another blank line
             client.println();
             // Break out of the while loop
@@ -175,6 +252,20 @@ if (accel.available())
     delay(1000);
   }
 
+  if (charge_state == "on")
+  {
+    charge_current_time = millis(); 
+    if (charge_duty_cycle <= 250 && charge_current_time >= CHARGE_DELAY_TIME){
+      charge_duty_cycle += INCREASE_RATE;
+      Serial.print(charge_duty_cycle);  
+    }
+    analogWrite(CHARGE_OUTPUT, charge_duty_cycle); 
+  }
+  //testing
+  if (!accel.available()){
+    brightness_coeff = 1; 
+  }
+  //brightness_coeff = 1; 
   int r_adj = constrain((int)r * brightness_coeff, 0, 255);
   int g_adj = constrain((int)g * brightness_coeff, 0, 255);
   int b_adj = constrain((int)b * brightness_coeff, 0, 255);
