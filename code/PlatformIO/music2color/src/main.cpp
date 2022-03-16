@@ -52,9 +52,10 @@ String charge_state = "off";
 String discharge_state = "off"; 
 int CHARGE_OUTPUT = 27; 
 int DISCHARGE_OUTPUT = 14; 
+const int CHARGE_INPUT = 12; 
 const int INCREASE_RATE = 5; 
 const int CHARGE_DELAY_TIME = 100; 
-int charge_duty_cycle = 10; 
+int charge_duty_cycle = 1; 
 unsigned long charge_prev_increase = millis(); 
 unsigned long charge_current_time = millis(); 
 
@@ -135,6 +136,8 @@ if (accel.available())
     brightness_coeff = (float)0.5/(accel_mag-0.5);
   }
 
+  float capacitor_voltage = (float) analogRead(CHARGE_INPUT) / 4095 * 3.3 * 2;
+
   // put your main code here, to run repeatedly:
   WiFiClient client = server.available();   // Listen for incoming clients
 
@@ -177,6 +180,7 @@ if (accel.available())
             } else if (header.indexOf("GET /" + String(DISCHARGE_OUTPUT) + "/on") >= 0) {
               Serial.println("discharging");
               discharge_state = "on";
+              charge_state = "off"; 
               digitalWrite(DISCHARGE_OUTPUT, HIGH);
             } else if (header.indexOf("GET /" + String(DISCHARGE_OUTPUT) + "/off") >= 0) {
               Serial.println("not discharging");
@@ -215,6 +219,8 @@ if (accel.available())
             } else {
               client.println("<p><a href=\"/" + String(DISCHARGE_OUTPUT) + "/off\"><button class=\"button button2\">OFF</button></a></p>");
             }
+
+            client.println("<p>capacitor voltage: " + String(capacitor_voltage) + "</p>"); 
             client.println("</body></html>");
             
             //Serial.println(header); 
@@ -260,11 +266,14 @@ if (accel.available())
       Serial.print(charge_duty_cycle);  
     }
     analogWrite(CHARGE_OUTPUT, charge_duty_cycle); 
+
+    
   }
   //testing
   if (!accel.available()){
     brightness_coeff = 1; 
   }
+  else brightness_coeff = constrain(brightness_coeff, 0.1, 2); 
   //brightness_coeff = 1; 
   int r_adj = constrain((int)r * brightness_coeff, 0, 255);
   int g_adj = constrain((int)g * brightness_coeff, 0, 255);
