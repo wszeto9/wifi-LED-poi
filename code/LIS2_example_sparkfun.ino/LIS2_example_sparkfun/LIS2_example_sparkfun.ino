@@ -5,11 +5,12 @@ SPARKFUN_LIS2DH12 accel;
 #include <Adafruit_NeoPixel.h>
 #define PIN        17
 #define NUMPIXELS 8
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+//Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 void setup()
 {
   Serial.begin(115200);
+  Serial.println("Start!");
   Wire.begin(16,4);
   if (accel.begin() == false)
   {
@@ -19,7 +20,7 @@ void setup()
   accel.setScale(LIS2DH12_16g);
   accel.setDataRate(LIS2DH12_ODR_400Hz);
   accel.setMode(LIS2DH12_LP_8bit);
-  pixels.begin();
+  //pixels.begin();
 }
 
 void loop()
@@ -40,7 +41,7 @@ void loop()
     Serial.println();*/
     int time_delay = (int) constrain((sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ)* 50)-70, 0, 1000);
     Serial.println(time_delay);
-    for(int i=0; i<NUMPIXELS; i++) { 
+    /*for(int i=0; i<NUMPIXELS; i++) { 
       pixels.setPixelColor(i, pixels.Color(200, 200, 200));
       pixels.show();
       }
@@ -48,7 +49,7 @@ void loop()
     for(int i=0; i<NUMPIXELS; i++) { 
       pixels.setPixelColor(i, pixels.Color(0, 0, 0));
       pixels.show();
-      }
+      }*/
     delay(time_delay);
   }
 }
